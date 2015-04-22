@@ -32,7 +32,7 @@
 			if($this->conn->query($query) === TRUE) {
 				return true;			
 			} else {
-				return $this->conn->error;
+				echo "Err-> $this->conn->error";
 			}
 		}
 
@@ -49,7 +49,7 @@
 				$values = trim($values, ",");
 				$query = "insert into " . $tableName . " (" . $columnNames . ") " . "values (" . $values . ")";
 				if ($this->conn->query($query) === TRUE) {
-					echo "<br>One Record inserted...!";
+					return true;
 				} else {
 					echo "<br>Err->" . $this->conn->error;
 				}

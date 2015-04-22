@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Login Page</title>
+	<title>Registeration Page</title>
 </head>
 <body>
 	<form action="auth_service.php" method="post">
@@ -13,14 +13,10 @@
 			<li>
 				<label>Password:</label><input type="password" id="pass" name="pass" />
 			</li>
-			<li>
-				<label>Enter your Password again:</label><input type="password" id="pass" name="pass" />
-			</li>
 			<li>	
-				<input type="submit" value="Submit">
+				<input type="submit" value="Register">
 			</li>
 		</ul>
 	</form>
-	<a href="/register.html">Register</a>
 </body>
 </html>

@@ -17,6 +17,6 @@
 			</li>
 		</ul>
 	</form>
-	<a href="/register.php">Register</a>
+	<a href="/social-documentation/register.php">Register</a>
 </body>
 </html>
