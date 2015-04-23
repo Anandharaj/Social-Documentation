@@ -25,7 +25,7 @@
 		}
 		function signOut($userName, $table_name) {
 			$sql = new MySqlLib();
-			$sql->connectDB("localhost", "root", "", "mydb");
+			$sql->connectDB("localhost", "root", "tiger", "mydb");
 			$sql->update($table_name, "logged=false", "userName=" . "'" . $userName . "'");
 			$sql->close();
 		}

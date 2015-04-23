@@ -2,9 +2,9 @@
 	include("curd_lib.php");
 	$uname = $_POST["uname"];
 	$password = $_POST["pass"];
-	$table_name = "userProfile";
+	$table_name = "userprofile";
 	$sql = new MySqlLib();
-	$sql->connectDB("localhost", "root", "", "mydb");
+	$sql->connectDB('localhost', 'root', 'tiger', 'mydb');
 	$result = $sql->find($table_name, "*", "userName=" . "'" . $uname . "'");
 	if ($result) {
 		$row = mysqli_fetch_assoc($result);
