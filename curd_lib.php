@@ -60,10 +60,11 @@
 		public function update($tableName, $fields_changes, $condition) {
 			$query = "update " . $tableName . " set " . $fields_changes . " where " .$condition;
 			if ($this->conn->query($query) === TRUE) {
-				echo "<br>Record Updated...!";
+				return true;
 			} else {
 				echo "<br>Err->" . $this->conn->error;
 			}
+			return null;
 		}
 
 		// Find Operation function call parameters tableName type(string), $columnName type(string) or type(Array) and $condition type(string)

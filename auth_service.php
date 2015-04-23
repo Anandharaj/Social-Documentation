@@ -2,21 +2,20 @@
 	include("curd_lib.php");
 	$uname = $_POST["uname"];
 	$password = $_POST["pass"];
-	$user_info = ["userName"=>"varchar(25) not null", "password"=>"varchar(20) not null", "primary key"=>"(userName)"];
+	$table_name = "userProfile";
 	$sql = new MySqlLib();
-	$sql->connectDB("localhost", "root", "tiger", "mydb");
-	$sql->create("userProfile", $user_info);
-	if ( $createDB === true) {
-		echo "Table Created...!";
-	} else {
-		echo "Err-> $createDB";
-	}
-	if ($uname && $password) {
-		$data = ["userName"=>$uname, "password"=>$password];
-		if ($sql->insert("userProfile", $data) === true) {
-			header("Location:/social-documentation/index.php");
+	$sql->connectDB("localhost", "root", "", "mydb");
+	$result = $sql->find($table_name, "*", "userName=" . "'" . $uname . "'");
+	if ($result) {
+		$row = mysqli_fetch_assoc($result);
+		if($row["password"] === $password) {
+			$sql->update($table_name, "logged=true", "userName=" . "'" . $uname . "'");
+			header("Location:/social-documentation/welcome_page.php");
+		} else {
+			echo "Enter Valid Password....!";
 		}
+	} else {
+		echo "Enter Valid User Name and Password....!";
 	}
-	// $sql->drop("table", "userProfile");
 	$sql->close();
 ?>

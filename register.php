@@ -4,7 +4,7 @@
 	<title>Registeration Page</title>
 </head>
 <body>
-	<form action="auth_service.php" method="post">
+	<form action="register_service.php" method="post">
 		<h3>Registeration Page</h3>
 		<ul>
 			<li>
