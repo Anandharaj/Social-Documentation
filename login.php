@@ -1,11 +1,10 @@
 <!doctype html>
 <html>
 <head>
-	<title>Registeration Page</title>
+	<title>Login Page</title>
 </head>
 <body>
-	<form action="index.php" method="post">
-		<h3>Registeration Page</h3>
+	<form action="" method="post">
 		<ul>
 			<li>
 				<label>User Name:</label><input type="text" id="uname" name="uname" />
@@ -14,9 +13,10 @@
 				<label>Password:</label><input type="password" id="pass" name="pass" />
 			</li>
 			<li>	
-				<input type="submit" name="submit" value="Register">
+				<input type="submit" name="submit" value="login" >
 			</li>
 		</ul>
 	</form>
+	<a href="/social-documentation/register.php">Register</a>
 </body>
 </html>

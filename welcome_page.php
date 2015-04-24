@@ -1,3 +1,8 @@
+<?php
+	$userName = $_SESSION['userName'];
+	echo "<h3>Welcome $userName.....!</h3>";
+	echo "<a href='/social-documentation/index.php?userName=$userName'>SignOut</a>";
+?>
 <html>
 <head>
 	<title>Welcome page</title>
@@ -11,38 +16,6 @@
 	</style>
 </head>
 <body onload="searchFile()">
-	<?php
-		include("curd_lib.php");
-		$sql = new MySqlLib();
-		$table_name = "userprofile";
-		$sql->connectDB("localhost", "root", "tiger", "mydb");
-		$result = $sql->find($table_name, "*", "logged=true");
-		$row = mysqli_fetch_assoc($result);
-		$list_files = ["file_1.txt", "file_2.txt", "file_3.txt"];
-		$userName = $row['userName'];
-		echo "<h3>Welcome $userName.....!</h3>";
-		echo "<a href='/social-documentation/index.php?userName=$userName&table_name=$table_name'>SignOut</a>";
-	?>
-<!-- 	<ul>
-		<li><button onclick="openFile(this)">file_1.txt</button>
-			<br>
-			<label>Read</label><input name="mode_1" value="read" checked="checked" type="radio">
-			<label>Append</label><input name="mode_1" value="append" type="radio">
-			<label>Write</label><input name="mode_1" value="write" type="radio">
-		</li>
-		<li><button onclick="openFile(this)">file_2.txt</button>
-			<br>
-			<label>Read</label><input name="mode_2" value="read" checked="checked" type="radio">
-			<label>Append</label><input name="mode_2" value="append" type="radio">
-			<label>Write</label><input name="mode_2" value="write" type="radio">
-		</li>
-		<li><button onclick="openFile(this)">file_3.txt</button>
-			<br>
-			<label>Read</label><input name="mode_3" value="read" checked="checked" type="radio">
-			<label>Append</label><input name="mode_3" value="append" type="radio">
-			<label>Write</label><input name="mode_3" value="write" type="radio">
-		</li>
-	</ul> -->
 	<textarea id="file_editor"></textarea>
 	<button onclick="updateFile(this)">Update</button>
 	<script type="text/javascript">
@@ -75,7 +48,7 @@
 			}
 			$.ajax({
 				type: "POST",
-				url: "/social-documentation/file_1.php",
+				url: "/social-documentation/file.php",
 				data: {fileDetails: {file_name: file_name, file_mode: mode}},
 				success:(function(data) {
 					$('#file_editor').val(data);
@@ -87,7 +60,7 @@
 			if((mode === "write" || mode === "append") && content) {
 				$.ajax({
 					type: "POST",
-					url: "/social-documentation/file_1.php",
+					url: "/social-documentation/file.php",
 					data: {fileUpdate: {file_name: file_name, file_mode: mode, file_content: content}},
 					success:(function(data) {
 						if (data === "Updated") {

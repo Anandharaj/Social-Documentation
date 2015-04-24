@@ -1,34 +1,29 @@
-<!doctype html>
-<html>
-<head>
-	<title>Login Page</title>
-</head>
-<body>
-	<form action="auth_service.php" method="post">
-		<ul>
-			<li>
-				<label>User Name:</label><input type="text" id="uname" name="uname" />
-			</li>
-			<li>
-				<label>Password:</label><input type="password" id="pass" name="pass" />
-			</li>
-			<li>	
-				<input type="submit" value="Submit">
-			</li>
-		</ul>
-	</form>
-	<a href="/social-documentation/register.php">Register</a>
-	<?php
-		include("curd_lib.php");
-		if(isset($_GET["userName"])) {
-			signOut($_GET["userName"], $_GET["table_name"]);
+<?php
+	if (!session_id()) {
+		session_start();
+	}
+	include("curd_lib.php");
+	include('auth_service.php');
+
+	$auth = new AuthService();
+	if (isset($_POST['submit']) && $_POST['submit'] === 'login') {
+		if ($auth->login($_POST['uname'], $_POST['pass'])) {		
+			$_SESSION['userName'] = $_POST['uname'];
+		} else {
+			echo "Failed";
 		}
-		function signOut($userName, $table_name) {
-			$sql = new MySqlLib();
-			$sql->connectDB("localhost", "root", "tiger", "mydb");
-			$sql->update($table_name, "logged=false", "userName=" . "'" . $userName . "'");
-			$sql->close();
-		}
-	?>
-</body>
-</html>
+	}
+	if (isset($_GET["userName"]) && isset($_SESSION['userName'])) {
+		session_destroy();
+		$auth->signOut($_GET["userName"]);
+	}	
+	if (isset($_POST['submit']) && $_POST['submit'] === 'Register') {
+		$auth->register($_POST['uname'], $_POST['pass']);
+	}
+
+	if (!isset($_SESSION['userName'])) {
+		include 'login.php';
+	} else {
+		include 'welcome_page.php';
+	}
+?>
